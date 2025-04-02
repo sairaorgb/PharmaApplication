@@ -37,6 +37,10 @@ dependencies:
   google_fonts: ^6.2.1
   carousel_slider: ^5.0.0
   hive_flutter: ^1.1.0
+  image_picker: ^1.0.7  # For picking images
+  path_provider: ^2.1.2  # For local storage access
+  path: ^1.8.3  # For file path operations
+  permission_handler: ^11.0.1
 
 dev_dependencies:
   flutter_test:

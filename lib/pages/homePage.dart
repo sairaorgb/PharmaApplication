@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pharma_application/database.dart';
 import 'package:pharma_application/pages/doctorNamePage.dart';
-import 'package:pharma_application/pages/welcomePage.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -113,7 +112,9 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Doctornamepage()));
+                          builder: (context) => DoctorNamePage(
+                                db: db,
+                              )));
                 },
               ),
             ),

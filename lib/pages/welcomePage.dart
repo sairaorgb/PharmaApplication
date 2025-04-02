@@ -1,52 +1,122 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pharma_application/components/button.dart';
+import 'package:pharma_application/database.dart';
+import 'package:pharma_application/pages/addChemistPage.dart';
+import 'package:pharma_application/pages/brochurePage.dart';
+import 'package:pharma_application/pages/detailsPage.dart';
 import 'package:pharma_application/pages/doctorNamePage.dart';
 
-class Welcomepage extends StatelessWidget {
-  const Welcomepage({super.key});
+class welcomePage extends StatelessWidget {
+  final Database db = Database();
 
   @override
   Widget build(BuildContext context) {
+    db.initdatabase();
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          SizedBox(
-            height: 40,
+      body: Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF75cdbd),
+              Color(0xFF007acc)
+            ], // Green to deep blue
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          Center(
-              child: Container(
-            height: 200,
-            child: Image.asset(
-              fit: BoxFit.cover,
-              'assets/images/logo.jpg',
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Company logo placeholder
+            CircleAvatar(
+                radius: 100,
+                backgroundColor: Colors.white,
+                child: Container(
+                  width: 170,
+                  child: Image.asset(
+                    'assets/images/logo.jpg',
+                    fit: BoxFit.cover,
+                  ),
+                )),
+            SizedBox(height: 20),
+            // Welcome text
+            Text(
+              'Welcome to Crasenim Pharma',
+              style: GoogleFonts.secularOne(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-          )),
-          GestureDetector(
-            onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Doctornamepage(),
-                )),
-            child: Container(
-                width: 200,
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(15)),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Center(
-                      child: Text(
-                    "Get Started",
-                    style: GoogleFonts.secularOne(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 21),
-                  )),
-                )),
-          )
-        ],
+            SizedBox(height: 30),
+            // Four rectangular buttons
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Button(
+                    label: '   Add Doctor ',
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DoctorNamePage(
+                            db: db,
+                          ),
+                        ))),
+                SizedBox(
+                  width: 10,
+                ),
+                Button(
+                    label: 'Add Chemist  ',
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Addchemistpage(
+                            db: db,
+                          ),
+                        ))),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Button(
+                    label: 'Brochure',
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Brochurepage(db: db),
+                        ))),
+                SizedBox(
+                  width: 10,
+                ),
+                Button(
+                    label: 'Details   ',
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Detailspage(
+                            db: db,
+                          ),
+                        ))),
+              ],
+            ),
+            SizedBox(height: 30),
+            // Footer text
+            Text(
+              'For Healthy Life',
+              style: GoogleFonts.secularOne(
+                fontSize: 16,
+                fontStyle: FontStyle.italic,
+                color: Colors.white70,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pharma_application/database.dart';
 
-class DoctorNamePage extends StatefulWidget {
+class Addchemistpage extends StatefulWidget {
   final Database db;
-  DoctorNamePage({super.key, required this.db});
+  const Addchemistpage({super.key, required this.db});
+
   @override
-  _DoctorNamePageState createState() => _DoctorNamePageState();
+  State<Addchemistpage> createState() => _AddchemistpageState();
 }
 
-class _DoctorNamePageState extends State<DoctorNamePage> {
+class _AddchemistpageState extends State<Addchemistpage> {
   final _formKey = GlobalKey<FormState>();
 
   String? maritalStatus;
-  bool isMarried = false;
   String? selectedDistrict;
   bool otherDistrictSelected = false;
   String? selectedTown;
@@ -23,14 +23,9 @@ class _DoctorNamePageState extends State<DoctorNamePage> {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController townController = TextEditingController();
   final TextEditingController districtController = TextEditingController();
-  final TextEditingController domController = TextEditingController();
 
   void updateDB(String key, dynamic value) {
     widget.db.updatedatabase(key, value);
-  }
-
-  void getDB(String key) {
-    widget.db.getdatabase(key);
   }
 
   @override
@@ -59,7 +54,7 @@ class _DoctorNamePageState extends State<DoctorNamePage> {
               icon: Icon(Icons.logout_sharp))
         ],
         title: Text(
-          'Doctor Details',
+          'Chemist Details',
           style: GoogleFonts.secularOne(fontSize: 26),
         ),
         flexibleSpace: Container(
@@ -178,65 +173,32 @@ class _DoctorNamePageState extends State<DoctorNamePage> {
                           ),
                   ],
                 ),
-                SizedBox(height: 16),
 
-                // Marital Status Radio Buttons
-                Text('Marital Status:'),
-                Row(
-                  children: [
-                    Radio<String>(
-                      value: 'Yes',
-                      groupValue: maritalStatus,
-                      onChanged: (value) {
-                        setState(() {
-                          maritalStatus = value;
-                          isMarried = true;
-                        });
-                      },
-                    ),
-                    Text('Yes'),
-                    Radio<String>(
-                      value: 'No',
-                      groupValue: maritalStatus,
-                      onChanged: (value) {
-                        setState(() {
-                          maritalStatus = value;
-                          isMarried = false;
-                        });
-                      },
-                    ),
-                    Text('No'),
-                  ],
+                SizedBox(
+                  height: 32,
                 ),
-
-                // Date of Marriage field if "Yes" is selected
-                if (isMarried)
-                  _buildTextField(
-                      domController, 'Date of Marriage (DD/MM/YYYY)'),
-                SizedBox(height: 62),
 
                 // Submit button
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      updateDB("doctorsList", [
+                      updateDB("chemistList", [
                         firstNameController.text,
                         lastNameController.text,
                         selectedDistrict ?? districtController.text,
                         selectedTown ?? townController.text,
-                        maritalStatus ?? '',
-                        isMarried ? domController.text : 'NA'
                       ]);
-
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Form Submitted Successfully!')),
                       );
-
                       Navigator.pop(context);
                     }
                   },
-                  style: ButtonStyle(),
-                  child: Text('Submit'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black, // Button background color
+                    foregroundColor: Colors.white, // Text & icon color
+                  ),
+                  child: SizedBox(child: Center(child: Text('Submit'))),
                 ),
               ],
             ),
