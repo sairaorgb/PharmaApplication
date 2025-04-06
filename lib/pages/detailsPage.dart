@@ -29,22 +29,13 @@ class Detailspage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var doctorsList = db.doctorsList;
-
     Map<String, Map<String, List<List<String>>>> groupedDoctors = {};
-
     for (var doctor in doctorsList) {
       if (doctor.length < 4) continue; // Ensure there are enough elements
-
       String district = doctor[2];
       String town = doctor[3];
-
-      // Group by district
       groupedDoctors.putIfAbsent(district, () => {});
-
-      // Group by town within the district
       groupedDoctors[district]!.putIfAbsent(town, () => []);
-
-      // Add doctor to the respective town
       groupedDoctors[district]![town]!.add(doctor);
     }
     return Scaffold(

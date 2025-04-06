@@ -1,7 +1,3 @@
-import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui';
-
 import 'package:hive_flutter/adapters.dart';
 
 class Database {
@@ -63,7 +59,8 @@ class Database {
     } else if (key == "medicineImages") {
       medicineImages.add(value);
       mybox.put(key, medicineImages);
-      print("added $value[\"name\"]");
+      print("sabar");
+      print(medicineImages);
     }
   }
 
@@ -75,7 +72,7 @@ class Database {
   List<List<String>> chemistList = [];
 
   List<String> districts = [
-    "Visakapatnam",
+    "Visakhapatnam",
     "Srikakulam",
     "Vizianagaram",
     "Other"
@@ -90,6 +87,33 @@ class Database {
       "Parvathipuram",
       "Cheepurupalli",
       "Other"
+    ],
+    "Visakhapatnam": [
+      "Visakhapatnam",
+      "Anakapalle",
+      "Bheemunipatnam",
+      "Yelamanchili",
+      "Narsipatnam",
+      "Chodavaram",
+      "Pendurthi",
+      "Gajuwaka",
+      "Malkapuram",
+      "Paravada",
+      "Araku Valley",
+      "Sabbavaram",
+      "Kasimkota",
+      "Payakaraopeta",
+      "Nakkapalli",
+      "Atchutapuram"
+    ],
+    "Srikakulam": [
+      "Srikakulam",
+      "Palasa",
+      "Tekkali",
+      "Amadalavalasa",
+      "Ichchapuram",
+      "Narasannapeta",
+      "Rajam",
     ]
   };
 
